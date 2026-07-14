@@ -83,4 +83,9 @@ class TestBooksCollector:
         assert len(collector.favorites) == 1
 
     
-    
+    def test_delete_book_from_favorites_book_is_removed_from_list(self):
+        collector = BooksCollector()
+        collector.add_new_book('Мастер и Маргарита')
+        collector.add_book_in_favorites('Мастер и Маргарита')
+        collector.delete_book_from_favorites('Мастер и Маргарита')
+        assert "Мастер и Маргарита" not in collector.favorites
