@@ -1,5 +1,5 @@
 from main import BooksCollector
-
+import pytest
 # класс TestBooksCollector объединяет набор тестов, которыми мы покрываем наше приложение BooksCollector
 # обязательно указывать префикс Test
 class TestBooksCollector:
@@ -18,7 +18,14 @@ class TestBooksCollector:
 
         # проверяем, что добавилось именно две
         # словарь books_rating, который нам возвращает метод get_books_rating, имеет длину 2
-        assert len(collector.get_books_rating()) == 2
+        assert len(collector.get_books_genre()) == 2
 
     # напиши свои тесты ниже
     # чтобы тесты были независимыми в каждом из них создавай отдельный экземпляр класса BooksCollector()
+
+    @pytest.mark.parametrize('name', ["Тени забытых миров: путь сквозь ледяные пустоши", "Эхо далёких звёзд: тайна пропавшей экспедиции", "Пески времени: хроники затерянного города под луной", ""])
+
+    def test_add_new_book_rejects_wrong_length_name(self, name):
+        collector = BooksCollector()
+        collector.add_new_book(name)
+        assert len(collector.get_books_genre()) == 0
