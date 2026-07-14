@@ -89,3 +89,7 @@ class TestBooksCollector:
         collector.add_book_in_favorites('Мастер и Маргарита')
         collector.delete_book_from_favorites('Мастер и Маргарита')
         assert "Мастер и Маргарита" not in collector.favorites
+
+    def test_get_list_of_favorites_books_returns_empty_list_when_no_books(self):
+        collector = BooksCollector()
+        assert collector.get_list_of_favorites_books() == []
