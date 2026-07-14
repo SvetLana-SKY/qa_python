@@ -68,3 +68,19 @@ class TestBooksCollector:
     def test_get_books_genre_returns_empty_dict_when_no_books(self):
         collector = BooksCollector()
         assert collector.get_books_genre() =={}
+
+    def test_get_books_for_children_add_books_for_children(self):
+        collector = BooksCollector()
+        collector.add_new_book('Кот Леопольд')
+        collector.set_book_genre('Кот Леопольд', 'Мультфильмы')
+        assert collector.get_books_for_children() == ["Кот Леопольд"]
+
+    def test_add_book_in_favorites_prevents_duplicate_in_favorites(self):
+        collector = BooksCollector()
+        collector.add_new_book('Мастер и Маргарита')
+        collector.add_book_in_favorites('Мастер и Маргарита')
+        collector.add_book_in_favorites('Мастер и Маргарита')
+        assert len(collector.favorites) == 1
+
+    
+    
