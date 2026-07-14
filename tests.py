@@ -29,3 +29,15 @@ class TestBooksCollector:
         collector = BooksCollector()
         collector.add_new_book(name)
         assert len(collector.get_books_genre()) == 0
+
+    def test_add_new_book_rejects_duplicate_name(self):
+        collector = BooksCollector()
+        collector.add_new_book('Мастер и Маргарита')
+        collector.add_new_book('Мастер и Маргарита')
+        assert len(collector.get_books_genre()) == 1
+
+    def test_set_book_genre_updates_genre_for_existing_book(self):
+        collector = BooksCollector()
+        collector.add_new_book('Гордость и предубеждение и зомби')
+        collector.set_book_genre('Гордость и предубеждение и зомби', 'Ужасы')
+        assert collector.get_books_genre() == {'Гордость и предубеждение и зомби': 'Ужасы'}
