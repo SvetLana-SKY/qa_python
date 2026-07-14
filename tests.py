@@ -22,20 +22,7 @@ class TestBooksCollector:
 
     # напиши свои тесты ниже
     # чтобы тесты были независимыми в каждом из них создавай отдельный экземпляр класса BooksCollector()
-
-    @pytest.mark.parametrize('name', ["Тени забытых миров: путь сквозь ледяные пустоши", "Эхо далёких звёзд: тайна пропавшей экспедиции", "Пески времени: хроники затерянного города под луной", ""])
-
-    def test_add_new_book_rejects_wrong_length_name(self, name):
-        collector = BooksCollector()
-        collector.add_new_book(name)
-        assert len(collector.get_books_genre()) == 0
-
-    def test_add_new_book_rejects_duplicate_name(self):
-        collector = BooksCollector()
-        collector.add_new_book('Мастер и Маргарита')
-        collector.add_new_book('Мастер и Маргарита')
-        assert len(collector.get_books_genre()) == 1
-
+  
     def test_set_book_genre_updates_genre_for_existing_book(self):
         collector = BooksCollector()
         collector.add_new_book('Гордость и предубеждение и зомби')
@@ -74,15 +61,7 @@ class TestBooksCollector:
         collector.add_new_book('Кот Леопольд')
         collector.set_book_genre('Кот Леопольд', 'Мультфильмы')
         assert collector.get_books_for_children() == ["Кот Леопольд"]
-
-    def test_add_book_in_favorites_prevents_duplicate_in_favorites(self):
-        collector = BooksCollector()
-        collector.add_new_book('Мастер и Маргарита')
-        collector.add_book_in_favorites('Мастер и Маргарита')
-        collector.add_book_in_favorites('Мастер и Маргарита')
-        assert len(collector.favorites) == 1
-
-    
+        
     def test_delete_book_from_favorites_book_is_removed_from_list(self):
         collector = BooksCollector()
         collector.add_new_book('Мастер и Маргарита')
@@ -93,3 +72,23 @@ class TestBooksCollector:
     def test_get_list_of_favorites_books_returns_empty_list_when_no_books(self):
         collector = BooksCollector()
         assert collector.get_list_of_favorites_books() == []
+
+    @pytest.mark.parametrize('name', ["Тени забытых миров: путь сквозь ледяные пустоши", "Эхо далёких звёзд: тайна пропавшей экспедиции", "Пески времени: хроники затерянного города под луной", ""])
+
+    def test_add_new_book_rejects_wrong_length_name(self, name):
+        collector = BooksCollector()
+        collector.add_new_book(name)
+        assert len(collector.get_books_genre()) == 0
+
+    def test_add_new_book_rejects_duplicate_name(self):
+        collector = BooksCollector()
+        collector.add_new_book('Мастер и Маргарита')
+        collector.add_new_book('Мастер и Маргарита')
+        assert len(collector.get_books_genre()) == 1
+
+    def test_add_book_in_favorites_prevents_duplicate_in_favorites(self):
+        collector = BooksCollector()
+        collector.add_new_book('Мастер и Маргарита')
+        collector.add_book_in_favorites('Мастер и Маргарита')
+        collector.add_book_in_favorites('Мастер и Маргарита')
+        assert len(collector.favorites) == 1
